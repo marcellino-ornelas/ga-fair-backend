@@ -4,11 +4,13 @@ var db = require('./models');
 var users_list = [
   {
     name: "Queen Regent, Stephanie",
+    email: "qrstephanie@gmail.com",
     password: "123",
     user_post: "Off with their heads!"
   },
   {
     name: "Badass Bill",
+    email: "bbill@gmail.com",
     password: "456",
     post: "Whatever..."
   }
@@ -84,6 +86,7 @@ db.Post.remove({}, function(err, questions){
       console.log("removed all users");
       users_list.forEach(function (userData){
         var user = new db.User({
+          email: userData.email,
           password: userData.password,
         });
         db.Post.find({ name: userData.name }, function(err, userPosts) {
