@@ -1,7 +1,8 @@
 var express = require('express'),
   app = express(),
-  controller = require('./controllers'),
-  bodyParser = require('body-parser');
+  controller = require('./controllers/index'),
+  bodyParser = require('body-parser')
+  routes = require('./controllers/routes/api');
 
   // Configure app
   app.use(express.static('public'));          // Static directory
@@ -9,11 +10,7 @@ var express = require('express'),
 
 // ROUTES
 // json endpoints
-app.get('/api/user', controller.users.index);
-
-app.get('/api/post', controller.posts.index);
-
-app.get('/api/location', controller.locations.index);
+app.use('/api', routes);
 
 //listen on port 3000
 app.listen(process.env.PORT || 3000, function() {
