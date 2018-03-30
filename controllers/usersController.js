@@ -1,4 +1,4 @@
-var db = require('../models/index');
+var db = require('../models');
 
 module.exports = {
   index: function(req,res){
@@ -12,7 +12,7 @@ module.exports = {
   login: function(req,res){
     const body = req.body;
 
-    User.findOne({
+    db.User.findOne({
       email: req.body.email
     }, function(err, user) {
       if (err) throw err;
@@ -23,13 +23,16 @@ module.exports = {
 
         user.comparePassword(req.body.password)
           .then(function(isMatch){
+
             if(!isMatch){
-              Promise.reject({ success: false, message: 'Authentication failed. Passwords did not match.' })
+              res.json({ success: false, message: 'Authentication failed. Passwords did not match.' })
             }
 
             res.json({ success: true, token: user.getJWT(), user: user.toWeb() });
           })
-          .catch(res.json)
+          .catch(function(err){
+            res.json({err: err})
+          })
       }
     });
 
@@ -82,5 +85,4 @@ module.exports = {
       res.status(200).json({"user": removedUser});
     });
   }
-
 };

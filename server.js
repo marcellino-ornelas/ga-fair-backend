@@ -2,6 +2,7 @@ var express = require('express'),
   app = express(),
   controller = require('./controllers/index'),
   bodyParser = require('body-parser'),
+  User = require('./models').User,
   passport = require('passport'),
   routes = require('./controllers/routes/api');
 
@@ -11,14 +12,6 @@ CONFIG.jwt_encryption  = process.env.JWT_ENCRYPTION || 'thisisjustalogpassword';
 CONFIG.jwt_expiration  = process.env.JWT_EXPIRATION || '10000';
 
 
-  // Configure app
-  app.use(express.static('public'));          // Static directory
-  app.use(bodyParser.urlencoded({ extended: true })); // req.body
-
-
-
-// ROUTES
-// json endpoints
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -32,30 +25,76 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+  // Configure app
+app.use(express.static('public'));          // Static directory
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // req.body
+
+// ROUTES
+// json endpoints
 
 app.use( passport.initialize());
 
 require('./config/auth')(passport);
 
-app.use('/api', routes);
+app.use(routes);
 
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+// app.post('/signup', function signup(req, res) {
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-  // render the error page
-  res.status(err.status || 500);
-  res.json({message:'error'});
-});
+//     const body = req.body;
+//     const user = new User(body);
 
+//     user.save(function(err){
+//       if(err) res.json({err:err});
+//       else res.json({success: true, user: user.toWeb(), token: user.getJWT() });
+//     })
+//   // User.register(new User({ username: req.body.password }), req.body.password,
+//   //   function (err, newUser) {
+//   //     passport.authenticate('local')(req, res, function() {
+//   //       res.send(newUser);
+//   //     });
+//   //   }
+// });
+
+// =======
+// app.post('/signup', function signup(req, res) {
+//   console.log(`${req.body.username} ${req.body.password}`);
+//   User.register(new User({ username: req.body.username }), req.body.password,
+//     function (err, newUser) {
+//       passport.authenticate('local')(req, res, function() {
+//         res.send(newUser);
+//       });
+//     }
+//   )});
+
+// app.post('/login', passport.authenticate('local'), function (req, res) {
+//   console.log("Logging in...")
+//   res.json(req.user);
+// })
+
+// app.get('/post', controller.posts.index);
+// app.get('/location', controller.locations.index);
+
+// // AUTH ROUTES
+// app.get('/users', controller.users.index);
+// app.delete('users/:user_id', controller.users.destroy);
+
+//   app.post('/login', passport.authenticate('local', function(err, user, info) {
+//       if (err) { console.log(err);}
+//       console.log(user)
+//       console.log(info)
+//   }), function (req, res) {
+//     console.log("Logging in...")
+//     res.json(req.user);
+//   })
+
+// app.get('/logout', function (req, res) {
+//   console.log("BEFORE logout", req);
+//   req.logout();
+//   res.send(req);
+//   console.log("AFTER logout", req);
+// });
 //listen on port 3000
-app.listen(process.env.PORT || 3000, function() {
-  console.log('Server running on http://localhost:3000');
+app.listen(process.env.PORT || 3001, function() {
+  console.log('Server running on http://localhost:3001');
 });

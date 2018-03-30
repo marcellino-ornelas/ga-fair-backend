@@ -4,11 +4,12 @@ var mongoose = require('mongoose'),
     jwt = require('jsonwebtoken'),
     bcrypt = require('bcrypt');
 
+
 const SALTCOUNT = 10;
 
 var UserSchema = new Schema({
   name: String,
-  email: { type: String, required: true },
+  username: { type: String, required: true },
   password: { type: String, required: true },
   posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
 });
@@ -19,14 +20,14 @@ UserSchema.pre('save', function(next){
     if(this.isModified('password') || this.isNew){
 
         bcrypt.genSalt(SALTCOUNT, function(err, salt) {
+          if( err ) return next(err);
 
-          if( err ) next(err);
-
-          bcrypt.hash(this.password, salt, function(err, hash) {
-
-            if( err ) next(err);
-            self.password = hash;
-            next();
+          bcrypt.hash(self.password, salt, function(err, hash) {
+            if( err ) return next(err);
+            else{
+              self.password = hash;
+              next();
+            }
           });
 
         });
@@ -37,13 +38,12 @@ UserSchema.pre('save', function(next){
 
 // added work
 UserSchema.methods.comparePassword = function(pw){
-
-    let self = this;
+    const self = this;
       return new Promise(function(resolve, reject){
-          bcrypt.compare(pw, this.password, function(err, pass) {
-            if( err ) reject(err);
-            if(!pass) reject( new Error("Invalid password") );
-            resolve(res);
+          bcrypt.compare(pw, self.password, function(err, pass) {
+            if( err ) { return reject(err);}
+            if(!pass) { return reject( new Error("Invalid password") );}
+            else { resolve(pass); }
       });
     });
 }
@@ -58,6 +58,6 @@ UserSchema.methods.toWeb = function(){
     return json;
 };
 
-var User = mongoose.model("User", UserSchema);
 
+var User = mongoose.model("User", UserSchema);
 module.exports = User;
