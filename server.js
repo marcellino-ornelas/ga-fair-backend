@@ -75,7 +75,13 @@ app.use(routes);
 // })
 
 app.get('/post', controller.posts.index);
+app.get('/post', controller.posts.create);
+app.get('/post/:id', controller.posts.show);
+app.get('/post/:id', controller.posts.update);
+app.get('/post/:id', controller.posts.destroy);
+
 app.get('/location', controller.locations.index);
+app.get('/location/:id', controller.locations.show);
 
 // // AUTH ROUTES
 // app.get('/users', controller.users.index);
