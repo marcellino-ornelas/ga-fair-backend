@@ -1,4 +1,4 @@
-var db = require('../models/index');
+var db = require('../models');
 
 module.exports = {
   index: function(req,res){
@@ -7,6 +7,35 @@ module.exports = {
       console.log("allUsers: \n", allUsers)
       res.json({"users": allUsers})
     });
+  },
+
+  login: function(req,res){
+    const body = req.body;
+
+    db.User.findOne({
+      email: req.body.email
+    }, function(err, user) {
+      if (err) throw err;
+
+      if (!user) {
+        res.json({ success: false, message: 'Authentication failed. User not found.' });
+      } else {
+
+        user.comparePassword(req.body.password)
+          .then(function(isMatch){
+
+            if(!isMatch){
+              res.json({ success: false, message: 'Authentication failed. Passwords did not match.' })
+            }
+
+            res.json({ success: true, token: user.getJWT(), user: user.toWeb() });
+          })
+          .catch(function(err){
+            res.json({err: err})
+          })
+      }
+    });
+
   },
 
   // show: function(req,res){
@@ -56,5 +85,4 @@ module.exports = {
       res.status(200).json({"user": removedUser});
     });
   }
-  
 };
