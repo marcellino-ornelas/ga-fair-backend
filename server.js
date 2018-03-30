@@ -3,7 +3,8 @@ var express = require('express'),
   controller = require('./controllers/index'),
   bodyParser = require('body-parser'),
   controller = require('./controllers'),
-  routes = require('./routes/api');
+  routes = require('./routes/api'),
+  logger = require('morgan');
 
 
 var passport = require('passport'),
@@ -29,6 +30,7 @@ app.use(function (req, res, next) {
 // Configure app
 app.use(express.static('public'));          // Static directory
 app.use(bodyParser.urlencoded({ extended: true })); // req.body
+app.use(logger('dev'));
 // app.use('/api', routes);
 app.use(cookieParser());
 app.use(session({
@@ -77,10 +79,14 @@ app.post('/signup', function signup(req, res) {
       });
     }
   )});
-app.post('/login', function (req, res) {
-  console.log("IN LOGIN: " + req.user);
-  res.send("YO");
-});
+  app.post('/login', passport.authenticate('local', function(err, user, info) {
+      if (err) { console.log(err);}
+      console.log(user)
+      console.log(info)
+  }), function (req, res) {
+    console.log("Logging in...")
+    res.json(req.user);
+  })
 
 app.get('/logout', function (req, res) {
   console.log("BEFORE logout", req);
