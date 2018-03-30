@@ -3,10 +3,9 @@ var Schema = mongoose.Schema;
 
 var PostSchema = new Schema({
   title: String,
-  location: String,
   image: String,
   postDescription: String,
-  // location: [{ type: Schema.Types.ObjectId, ref: 'Location' }],
+  location: [{ type: Schema.Types.ObjectId, ref: 'Location' }],
   owner: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 });
 

@@ -32,47 +32,14 @@ app.use(express.static('public'));          // Static directory
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // req.body
 
-// ROUTES
-// json endpoints
-
 app.use( passport.initialize());
 
 require('./config/auth')(passport);
 
+// ROUTES
+// json endpoints
+
 app.use(routes);
-
-// app.post('/signup', function signup(req, res) {
-
-//     const body = req.body;
-//     const user = new User(body);
-
-//     user.save(function(err){
-//       if(err) res.json({err:err});
-//       else res.json({success: true, user: user.toWeb(), token: user.getJWT() });
-//     })
-//   // User.register(new User({ username: req.body.password }), req.body.password,
-//   //   function (err, newUser) {
-//   //     passport.authenticate('local')(req, res, function() {
-//   //       res.send(newUser);
-//   //     });
-//   //   }
-// });
-
-// =======
-// app.post('/signup', function signup(req, res) {
-//   console.log(`${req.body.username} ${req.body.password}`);
-//   User.register(new User({ username: req.body.username }), req.body.password,
-//     function (err, newUser) {
-//       passport.authenticate('local')(req, res, function() {
-//         res.send(newUser);
-//       });
-//     }
-//   )});
-
-// app.post('/login', passport.authenticate('local'), function (req, res) {
-//   console.log("Logging in...")
-//   res.json(req.user);
-// })
 
 app.get('/post', controller.posts.index);
 app.get('/post', controller.posts.create);
@@ -83,26 +50,6 @@ app.get('/post/:id', controller.posts.destroy);
 app.get('/location', controller.locations.index);
 app.get('/location/:id', controller.locations.show);
 
-// // AUTH ROUTES
-// app.get('/users', controller.users.index);
-// app.delete('users/:user_id', controller.users.destroy);
-
-//   app.post('/login', passport.authenticate('local', function(err, user, info) {
-//       if (err) { console.log(err);}
-//       console.log(user)
-//       console.log(info)
-//   }), function (req, res) {
-//     console.log("Logging in...")
-//     res.json(req.user);
-//   })
-
-// app.get('/logout', function (req, res) {
-//   console.log("BEFORE logout", req);
-//   req.logout();
-//   res.send(req);
-//   console.log("AFTER logout", req);
-// });
-//listen on port 3000
 app.listen(process.env.PORT || 3001, function() {
   console.log('Server running on http://localhost:3001');
 });
