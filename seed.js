@@ -6,13 +6,11 @@ var users_list = [
     name: "Queen Regent, Stephanie",
     email: "qrstephanie@gmail.com",
     password: "123",
-    user_post: "Off with their heads!"
   },
   {
     name: "Badass Bill",
     email: "bbill@gmail.com",
     password: "456",
-    post: "Whatever..."
   }
 ];
 
@@ -42,20 +40,20 @@ var locations_list = [
   }
 ];
 
-// db.User.remove({}, function(err, users){
-//   if(err) {
-//     console.log('Error occured in remove', err);
-//   } else {
-//     console.log('removed all users');
-//
-//     // create new records based on seeded users array
-//     db.User.create(users_list, function(err, users){
-//       if (err) { return console.log('err', err); }
-//       console.log("created", users.length, "users");
-//       process.exit();
-//     });
-//   }
-// });
+db.User.remove({}, function(err, users){
+  if(err) {
+    console.log('Error occured in remove', err);
+  } else {
+    console.log('removed all users');
+
+    // create new records based on seeded users array
+    db.User.create(users_list, function(err, users){
+      if (err) { return console.log('err', err); }
+      console.log("created", users.length, "users");
+      process.exit();
+    });
+  }
+});
 //
 // db.Post.remove({}, function(err, posts){
 //   if(err) {
@@ -72,55 +70,56 @@ var locations_list = [
 //   }
 // });
 
-db.Post.remove({}, function(err, questions){
-  console.log("removed all posts");
-  db.Post.create(posts_list, function(err, posts){
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log("recreated all posts");
-    console.log("created", posts.length, "posts");
 
-    db.User.remove({}, function(err, user){
-      console.log("removed all users");
-      users_list.forEach(function (userData){
-        var user = new db.User({
-          email: userData.email,
-          password: userData.password,
-        });
-        db.Post.find({ name: userData.name }, function(err, userPosts) {
-          user.user_posts = userPosts;
+// db.Post.remove({}, function(err, questions){
+//   console.log("removed all posts");
+//   db.Post.create(posts_list, function(err, posts){
+//     if (err) {
+//       console.log(err);
+//       return;
+//     }
+//     console.log("recreated all posts");
+//     console.log("created", posts.length, "posts");
 
-          if (err) {
-            console.log(err);
-            return;
-          }
+//     db.User.remove({}, function(err, user){
+//       console.log("removed all users");
+//       users_list.forEach(function (userData){
+//         var user = new db.User({
+//           email: userData.email,
+//           password: userData.password,
+//         });
+//         db.Post.find({ name: userData.name }, function(err, userPosts) {
+//           user.user_posts = userPosts;
 
-          user.save(function(err, savedUser) {
-            if (err) {
-              return console.log(err);
-            }
-            console.log('saved ' + savedUser.name + ' with posts ' + userPosts);
-          });
+//           if (err) {
+//             console.log(err);
+//             return;
+//           }
 
-        });
-      });
-    });
-  });
-});
+//           user.save(function(err, savedUser) {
+//             if (err) {
+//               return console.log(err);
+//             }
+//             console.log('saved ' + savedUser.name + ' with posts ' + userPosts);
+//           });
 
-db.Location.remove({}, function(err, locations){
-  if(err) {
-    console.log('Error occured in remove', err);
-  } else {
-    console.log('removed all locations');
+//         });
+//       });
+//     });
+//   });
+// });
 
-    // create new records based on seeded users array
-    db.Location.create(locations_list, function(err, locations){
-      if (err) { return console.log('err', err); }
-      console.log("created", locations.length, "locations");
-      process.exit();
-    });
-  }
-});
+// db.Location.remove({}, function(err, locations){
+//   if(err) {
+//     console.log('Error occured in remove', err);
+//   } else {
+//     console.log('removed all locations');
+
+//     // create new records based on seeded users array
+//     db.Location.create(locations_list, function(err, locations){
+//       if (err) { return console.log('err', err); }
+//       console.log("created", locations.length, "locations");
+//       process.exit();
+//     });
+//   }
+// });

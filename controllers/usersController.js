@@ -9,6 +9,32 @@ module.exports = {
     });
   },
 
+  login: function(req,res){
+    const body = req.body;
+
+    User.findOne({
+      email: req.body.email
+    }, function(err, user) {
+      if (err) throw err;
+
+      if (!user) {
+        res.json({ success: false, message: 'Authentication failed. User not found.' });
+      } else {
+
+        user.comparePassword(req.body.password)
+          .then(function(isMatch){
+            if(!isMatch){
+              Promise.reject({ success: false, message: 'Authentication failed. Passwords did not match.' })
+            }
+
+            res.json({ success: true, token: user.getJWT(), user: user.toWeb() });
+          })
+          .catch(res.json)
+      }
+    });
+
+  },
+
   // show: function(req,res){
   //   var userId = req.params.id;
   //   db.User.findOne({_id: userId})
@@ -56,5 +82,5 @@ module.exports = {
       res.status(200).json({"user": removedUser});
     });
   }
-  
+
 };

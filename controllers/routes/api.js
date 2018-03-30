@@ -1,22 +1,26 @@
 var express = require('express'),
     router = express.Router(),
     controller = require('../index'),
+    passport = require('passport'),
     bodyParser = require('body-parser');
 
 // ensure authentication here
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    console.log("User authenticated.");
-    return next(); }
-  res.redirected('/login');
-}
+// function ensureAuthenticated(req, res, next) {
+//   if (req.isAuthenticated()) {
+//     console.log("User authenticated.");
+//     return next(); }
+//   res.redirected('/login');
+// }
 
-router.use('/', ensureAuthenticated);
+// router.use('/', ensureAuthenticated);
 
 router.get('/user', controller.users.index);
 
 router.get('/post', controller.posts.index);
 
 router.get('/location', controller.locations.index);
+
+
+router.post('/login', controller.users.login );
 
 module.exports = router;
