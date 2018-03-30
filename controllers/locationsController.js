@@ -11,21 +11,21 @@ module.exports = {
 
   show: function(req,res){
     var locationId = req.params.id;
-    db.user.findOne({_id: locationId}, function(err, foundLocation){
+    db.location.findOne({_id: locationId}, function(err, foundLocation){
       if(err){res.status(500).json({"ERROR":"Database Error"});}
       console.log("foundLocation: \n", foundLocation);
       res.status(200).json({"location": foundLocation});
     });
   },
 
-  create: function(req, res){
-    var newLocation = req.body;
-    db.user.create(newLocation, function(err, newLocation){
-      if(err){res.status(500).json({"ERROR":"Database Error"});}
-      console.log("newLocation: \n", newLocation);
-      res.status(200).json({"location": newLocation});
-    });
-  },
+  // create: function(req, res){
+  //   var newLocation = req.body;
+  //   db.location.create(newLocation, function(err, newLocation){
+  //     if(err){res.status(500).json({"ERROR":"Database Error"});}
+  //     console.log("newLocation: \n", newLocation);
+  //     res.status(200).json({"location": newLocation});
+  //   });
+  // },
 
   update: function(req, res){
     var updatedLocation = req.body;

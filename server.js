@@ -4,13 +4,15 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   User = require('./models').User,
   passport = require('passport'),
-  routes = require('./controllers/routes/api');
+  routes = require('./controllers/routes/api'),
+  logger = require('morgan');
 
 CONFIG = {} //Make this global to use all over the application
 
 CONFIG.jwt_encryption  = process.env.JWT_ENCRYPTION || 'thisisjustalogpassword';
 CONFIG.jwt_expiration  = process.env.JWT_EXPIRATION || '10000';
 
+app.use(logger('dev'));
 
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
@@ -72,8 +74,8 @@ app.use(routes);
 //   res.json(req.user);
 // })
 
-// app.get('/post', controller.posts.index);
-// app.get('/location', controller.locations.index);
+app.get('/post', controller.posts.index);
+app.get('/location', controller.locations.index);
 
 // // AUTH ROUTES
 // app.get('/users', controller.users.index);

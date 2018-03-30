@@ -22,6 +22,11 @@ var posts_list = [
   },
   {
     title: "second post",
+    location: "San Francisco",
+    post_description: "Back in the bay!"
+  },
+  {
+    title: "third post",
     location: "Sydney",
     post_description: "second post"
   }
@@ -40,20 +45,20 @@ var locations_list = [
   }
 ];
 
-db.User.remove({}, function(err, users){
-  if(err) {
-    console.log('Error occured in remove', err);
-  } else {
-    console.log('removed all users');
-
-    // create new records based on seeded users array
-    db.User.create(users_list, function(err, users){
-      if (err) { return console.log('err', err); }
-      console.log("created", users.length, "users");
-      process.exit();
-    });
-  }
-});
+// db.User.remove({}, function(err, users){
+//   if(err) {
+//     console.log('Error occured in remove', err);
+//   } else {
+//     console.log('removed all users');
+//
+//     // create new records based on seeded users array
+//     db.User.create(users_list, function(err, users){
+//       if (err) { return console.log('err', err); }
+//       console.log("created", users.length, "users");
+//       process.exit();
+//     });
+//   }
+// });
 //
 // db.Post.remove({}, function(err, posts){
 //   if(err) {
@@ -71,50 +76,50 @@ db.User.remove({}, function(err, users){
 // });
 
 
-// db.Post.remove({}, function(err, questions){
-//   console.log("removed all posts");
-//   db.Post.create(posts_list, function(err, posts){
-//     if (err) {
-//       console.log(err);
-//       return;
-//     }
-//     console.log("recreated all posts");
-//     console.log("created", posts.length, "posts");
+db.Post.remove({}, function(err, questions){
+  console.log("removed all posts");
+  db.Post.create(posts_list, function(err, posts){
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log("recreated all posts");
+    console.log("created", posts.length, "posts");
 
-//     db.User.remove({}, function(err, user){
-//       console.log("removed all users");
-//       users_list.forEach(function (userData){
-//         var user = new db.User({
-//           email: userData.email,
-//           password: userData.password,
-//         });
-//         db.Post.find({ name: userData.name }, function(err, userPosts) {
-//           user.user_posts = userPosts;
+    db.Location.remove({}, function(err, location){
+      console.log("removed all locations");
+      locations_list.forEach(function (locationData){
+        var location = new db.Location({
+          city: locationData.city,
+          image: locationData.image,
+        });
+        db.Post.find({ location: locationData.city }, function(err, locationPosts) {
+          location.posts = locationPosts;
 
-//           if (err) {
-//             console.log(err);
-//             return;
-//           }
+          if (err) {
+            console.log(err);
+            return;
+          }
 
-//           user.save(function(err, savedUser) {
-//             if (err) {
-//               return console.log(err);
-//             }
-//             console.log('saved ' + savedUser.name + ' with posts ' + userPosts);
-//           });
+          location.save(function(err, savedlocation) {
+            if (err) {
+              return console.log(err);
+            }
+            console.log('saved ' + savedlocation.city + ' with posts ' + locationPosts);
+          });
 
-//         });
-//       });
-//     });
-//   });
-// });
+        });
+      });
+    });
+  });
+});
 
 // db.Location.remove({}, function(err, locations){
 //   if(err) {
 //     console.log('Error occured in remove', err);
 //   } else {
 //     console.log('removed all locations');
-
+//
 //     // create new records based on seeded users array
 //     db.Location.create(locations_list, function(err, locations){
 //       if (err) { return console.log('err', err); }
