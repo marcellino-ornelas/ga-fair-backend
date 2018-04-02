@@ -23,15 +23,6 @@ router.get('/location', controller.locations.index);
 
 router.post('/login', controller.users.login );
 
-router.post('/signup', function signup(req, res) {
-
-    const body = req.body;
-    const user = new User(body);
-
-    user.save(function(err){
-      if(err) res.status(500).json({err:err});
-      else res.json({success: true, user: user.toWeb(), token: user.getJWT() });
-    });
-});
+router.post('/signup', controller.users.create );
 
 module.exports = router;

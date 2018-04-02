@@ -13,11 +13,10 @@ module.exports = {
     const body = req.body;
 
     db.User.findOne({
-      email: req.body.email
+      username: req.body.username
     }, function(err, user) {
-      if (err) throw err;
 
-      if (!user) {
+      if (err || !user) {
         res.json({ success: false, message: 'Authentication failed. User not found.' });
       } else {
 
@@ -31,11 +30,20 @@ module.exports = {
             res.json({ success: true, token: user.getJWT(), user: user.toWeb() });
           })
           .catch(function(err){
-            res.json({err: err})
+            res.json({ success: false, message: err.message || "Internal server error"})
           })
       }
     });
 
+  },
+  create: function(req, res) {
+    const body = req.body;
+    const user = new db.User(body);
+
+    user.save(function(err){
+      if(err) res.json({ success: false, message: "User name already exists. Please choose a different user name." });
+      else res.status(200).json({success: true, user: user.toWeb(), token: user.getJWT() });
+    });
   },
 
   // show: function(req,res){
@@ -58,15 +66,6 @@ module.exports = {
     });
   },
 
-  create: function(req, res){
-    var newUser = req.body;
-    db.user.create(newUser, function(err, newUser){
-      if(err){res.status(500).json({"ERROR":"Database Error"});}
-      console.log("newUser: \n", newUser);
-      res.status(200).json({"user": newUser});
-    });
-  },
-
   update: function(req, res){
     var updatedUser = req.body;
     var userId = req.params.id
@@ -77,12 +76,12 @@ module.exports = {
     });
   },
 
-  destroy: function(req, res){
-    var userId = req.params.id
-    db.user.remove({_id: userId}, function(err, removedUser){
-      if(err){res.status(500).json({"ERROR":"Database Error"});}
-      console.log("removedUser: \n", removedUser);
-      res.status(200).json({"user": removedUser});
-    });
-  }
+  // destroy: function(req, res){
+  //   var userId = req.params.id
+  //   db.user.remove({_id: userId}, function(err, removedUser){
+  //     if(err){res.status(500).json({"ERROR":"Database Error"});}
+  //     console.log("removedUser: \n", removedUser);
+  //     res.status(200).json({"user": removedUser});
+  //   });
+  // }
 };
