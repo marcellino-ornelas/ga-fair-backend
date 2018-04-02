@@ -5,8 +5,8 @@ var PostSchema = new Schema({
   title: String,
   image: String,
   postDescription: String,
-  location: [{ type: Schema.Types.ObjectId, ref: 'Location' }],
-  owner: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+  location: { type: Schema.Types.ObjectId, ref: 'Location' },
+  owner: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 var Post = mongoose.model("Post", PostSchema);

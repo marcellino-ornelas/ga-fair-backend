@@ -1,10 +1,10 @@
 var express = require('express'),
   app = express(),
-  controller = require('./controllers/index'),
+  controller = require('./controllers'),
   bodyParser = require('body-parser'),
   User = require('./models').User,
   passport = require('passport'),
-  routes = require('./controllers/routes/api'),
+  routes = require('./routes');
   logger = require('morgan');
 
 CONFIG = {} //Make this global to use all over the application
@@ -35,9 +35,6 @@ app.use(bodyParser.urlencoded({ extended: true })); // req.body
 app.use( passport.initialize());
 
 require('./config/auth')(passport);
-
-// ROUTES
-// json endpoints
 
 app.use(routes);
 
