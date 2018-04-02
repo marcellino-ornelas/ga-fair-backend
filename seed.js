@@ -1,48 +1,72 @@
 //Queen Regent Stephanie
 var db = require('./models');
 
-var usersList = [
-  {
-    name: "Queen Regent, Stephanie",
-    email: "qrstephanie@gmail.com",
-    password: "123"
-  },
-  {
-    name: "Badass Bill",
-    email: "bbill@gmail.com",
-    password: "456"
-  }
-];
+// var usersList = [
+//   {
+//     name: "Queen Regent, Stephanie",
+//     email: "qrstephanie@gmail.com",
+//     password: "123"
+//   },
+//   {
+//     name: "Badass Bill",
+//     email: "bbill@gmail.com",
+//     password: "456"
+//   }
+// ];
 
 var postsList = [
   {
     title: "first post",
     location: "San Francisco",
     image: "https://sf.curbed.com/2017/7/10/15949390/sf-least-affordable-rent-business",
-    postDescription: "here we are at our first post"
+    postDescription: "first post: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   },
   {
     title: "second post",
     location: "San Francisco",
     image: " ",
-    postDescription: "Back in the bay!"
+    postDescription: "Back in the bay: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   },
   {
     title: "third post",
     location: "Sydney",
     image: "https://lonelyplanetimages.imgix.net/mastheads/65830387.jpg?sharp=10&vib=20&w=1200",
-    postDescription: "second post"
+    postDescription: "Down-under post: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+  {
+    title: "fourth post",
+    location: "Seattle",
+    image: "https://lonelyplanetimages.imgix.net/mastheads/65830387.jpg?sharp=10&vib=20&w=1200",
+    postDescription: "From the needle: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+  {
+    title: "fifth post",
+    location: "London",
+    image: "https://lonelyplanetimages.imgix.net/mastheads/65830387.jpg?sharp=10&vib=20&w=1200",
+    postDescription: "Proper post: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   }
 ];
 
 var locationsList = [
   {
     country: "United States of America",
-    city: "San Francisco"
+    city: "San Francisco",
+    image: " "
   },
   {
     country: "Australia",
-    city: "Sydney"
+    city: "Sydney",
+    image: " "
+  },
+  {
+    country: "England",
+    city: "London",
+    image: " "
+  },
+  {
+    country: "United States of America",
+    city: "Seattle",
+    image: " "
   }
 ];
 

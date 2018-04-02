@@ -24,8 +24,9 @@ router.post('/signup', function signup(req, res) {
     }
   )});
 router.post('/login', function (req, res) {
-  console.log("IN LOGIN: " + req.user);
-  res.send("YO");
+  passport.authenticate('local')(req, res, function() {
+    res.send(newUser);
+  });
 });
 
 router.get('/logout', function (req, res) {

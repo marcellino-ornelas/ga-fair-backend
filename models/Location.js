@@ -5,6 +5,7 @@ var Post = require('./Post');
 var LocationSchema = new Schema({
   country: String,
   city: String,
+  image: String
 });
 
 var Location = mongoose.model("Location", LocationSchema);
