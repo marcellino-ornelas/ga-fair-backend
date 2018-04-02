@@ -1,125 +1,126 @@
 //Queen Regent Stephanie
 var db = require('./models');
 
-var users_list = [
-  {
-    name: "Queen Regent, Stephanie",
-    email: "qrstephanie@gmail.com",
-    password: "123",
-  },
-  {
-    name: "Badass Bill",
-    email: "bbill@gmail.com",
-    password: "456",
-  }
-];
+// var usersList = [
+//   {
+//     name: "Queen Regent, Stephanie",
+//     email: "qrstephanie@gmail.com",
+//     password: "123"
+//   },
+//   {
+//     name: "Badass Bill",
+//     email: "bbill@gmail.com",
+//     password: "456"
+//   }
+// ];
 
-var posts_list = [
+var postsList = [
   {
     title: "first post",
     location: "San Francisco",
-    post_description: "here we are at our first post"
+    image: "https://sf.curbed.com/2017/7/10/15949390/sf-least-affordable-rent-business",
+    postDescription: "first post: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   },
   {
     title: "second post",
-    location: "Sydney",
-    post_description: "second post"
-  }
-];
-
-var locations_list = [
-  {
-    city: "San Francisco",
-    image: "https://sf.curbed.com/2017/7/10/15949390/sf-least-affordable-rent-business",
-    post: "seeded post about SF"
+    location: "San Francisco",
+    image: " ",
+    postDescription: "Back in the bay: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   },
   {
-    city: "Sydney",
-    image:"https://lonelyplanetimages.imgix.net/mastheads/65830387.jpg?sharp=10&vib=20&w=1200",
-    post: "seeded post about Sydney, Australia"
+    title: "third post",
+    location: "Sydney",
+    image: "https://lonelyplanetimages.imgix.net/mastheads/65830387.jpg?sharp=10&vib=20&w=1200",
+    postDescription: "Down-under post: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+  {
+    title: "fourth post",
+    location: "Seattle",
+    image: "https://lonelyplanetimages.imgix.net/mastheads/65830387.jpg?sharp=10&vib=20&w=1200",
+    postDescription: "From the needle: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+  {
+    title: "fifth post",
+    location: "London",
+    image: "https://lonelyplanetimages.imgix.net/mastheads/65830387.jpg?sharp=10&vib=20&w=1200",
+    postDescription: "Proper post: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   }
 ];
 
-db.User.remove({}, function(err, users){
-  if(err) {
-    console.log('Error occured in remove', err);
-  } else {
-    console.log('removed all users');
-
-    // create new records based on seeded users array
-    db.User.create(users_list, function(err, users){
-      if (err) { return console.log('err', err); }
-      console.log("created", users.length, "users");
-      process.exit();
-    });
+var locationsList = [
+  {
+    country: "United States of America",
+    city: "San Francisco",
+    image: " "
+  },
+  {
+    country: "Australia",
+    city: "Sydney",
+    image: " "
+  },
+  {
+    country: "England",
+    city: "London",
+    image: " "
+  },
+  {
+    country: "United States of America",
+    city: "Seattle",
+    image: " "
   }
+];
+
+// db.User.remove({}, function(err, users){
+//   if(err) {
+//     console.log('Error occured in remove', err);
+//   } else {
+//     console.log('removed all users');
+//
+//     // create new records based on seeded users array
+//     db.User.create(usersList, function(err, users){
+//       if (err) { return console.log('err', err); }
+//       console.log("created", users.length, "users");
+//       process.exit();
+//     });
+//   }
+// });
+
+
+db.Location.remove({}, function(err, locations) {
+  console.log("remove all locations");
+  db.Location.create(locationsList, function(err, locations) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log('recreated all locations');
+    console.log('created ', locations.length, 'locations');
+
+    db.Post.remove({}, function(err, post){
+      console.log('removed all posts');
+      postsList.forEach(function (postData) {
+        var post = new db.Post({
+          title: postData.title,
+          location: postData.location,
+          image: postData.image,
+          postDescription: postData.postDescription
+        });
+        db.Location.findOne({ city: postData.location }, function(err, foundCity) {
+          console.log(foundCity)
+          console.log('found location ' + foundCity.city + ' for location ' + post.location);
+          if (err) {
+            console.log(err);
+            return;
+          }
+          post.location = foundCity;
+          post.save(function(err, savedPost){
+            if (err) {
+              return console.log(err);
+            }
+            console.log('saved ' + savedPost.title + ' with location ' + foundCity.city);
+          });
+        });
+      });
+    });
+  });
 });
-//
-// db.Post.remove({}, function(err, posts){
-//   if(err) {
-//     console.log('Error occured in remove', err);
-//   } else {
-//     console.log('removed all posts');
-//
-//     // create new records based on seeded users array
-//     db.Post.create(posts_list, function(err, posts){
-//       if (err) { return console.log('err', err); }
-//       console.log("created", posts.length, "posts");
-//       process.exit();
-//     });
-//   }
-// });
-
-
-// db.Post.remove({}, function(err, questions){
-//   console.log("removed all posts");
-//   db.Post.create(posts_list, function(err, posts){
-//     if (err) {
-//       console.log(err);
-//       return;
-//     }
-//     console.log("recreated all posts");
-//     console.log("created", posts.length, "posts");
-
-//     db.User.remove({}, function(err, user){
-//       console.log("removed all users");
-//       users_list.forEach(function (userData){
-//         var user = new db.User({
-//           email: userData.email,
-//           password: userData.password,
-//         });
-//         db.Post.find({ name: userData.name }, function(err, userPosts) {
-//           user.user_posts = userPosts;
-
-//           if (err) {
-//             console.log(err);
-//             return;
-//           }
-
-//           user.save(function(err, savedUser) {
-//             if (err) {
-//               return console.log(err);
-//             }
-//             console.log('saved ' + savedUser.name + ' with posts ' + userPosts);
-//           });
-
-//         });
-//       });
-//     });
-//   });
-// });
-
-// db.Location.remove({}, function(err, locations){
-//   if(err) {
-//     console.log('Error occured in remove', err);
-//   } else {
-//     console.log('removed all locations');
-
-//     // create new records based on seeded users array
-//     db.Location.create(locations_list, function(err, locations){
-//       if (err) { return console.log('err', err); }
-//       console.log("created", locations.length, "locations");
-//       process.exit();
-//     });
-//   }
-// });

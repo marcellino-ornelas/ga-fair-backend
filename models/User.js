@@ -9,6 +9,7 @@ const SALTCOUNT = 10;
 
 var UserSchema = new Schema({
   name: String,
+  currentCity: String,
   username: { type: String, required: true },
   password: { type: String, required: true },
   posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }]

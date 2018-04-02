@@ -4,26 +4,9 @@ var express = require('express'),
     router = express.Router(),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
-    // passport = require('passport'),
-    // LocalStrategy = require('passport-local').Strategy,
     bodyParser = require('body-parser');
 
 var User = db.User;
-
-// ensure authentication here
-// function ensureAuthenticated(req, res, next) {
-//   if (req.isAuthenticated()) {
-//     console.log("User authenticated.");
-//     return next(); }
-//   res.redirected('/login');
-// }
-
-// router.get('/user', ensureAuthenticated, controller.users.index);
-
-//passport configuation
-// passport.use(new LocalStrategy(db.User.authenticate()));
-// passport.serializeUser(db.User.serializeUser());
-// passport.deserializeUser(db.User.deserializeUser());
 
 router.get('/post', controller.posts.index);
 router.get('/location', controller.locations.index);
@@ -41,8 +24,9 @@ router.post('/signup', function signup(req, res) {
     }
   )});
 router.post('/login', function (req, res) {
-  console.log("IN LOGIN: " + req.user);
-  res.send("YO");
+  passport.authenticate('local')(req, res, function() {
+    res.send(newUser);
+  });
 });
 
 router.get('/logout', function (req, res) {
