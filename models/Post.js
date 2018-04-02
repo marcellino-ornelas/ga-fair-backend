@@ -6,8 +6,9 @@ var PostSchema = new Schema({
   // for seeding purposes only
   title: String,
   location: String,
-  post_description: String
-  // location: [{ type: Schema.Types.ObjectId, ref: 'Location' }],
+  post_description: String,
+  location: { type: Schema.Types.ObjectId, ref: 'Location' },
+  owner: { type: Schema.Types.ObjectId, ref: 'User' }
   // post_description: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 });
 
