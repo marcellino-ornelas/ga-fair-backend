@@ -1,6 +1,9 @@
 {
   "name": "ga-fair",
   "version": "1.0.0",
+  "engines": {
+    "node":"8.4.0"
+  },
   "description": "\"project 3\"",
   "main": "server.js",
   "scripts": {
