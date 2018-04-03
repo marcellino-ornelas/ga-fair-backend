@@ -59,10 +59,10 @@ module.exports = {
 
   show: function(req,res){
     var userId = req.params.id;
-    db.user.findOne({_id: userId}, function(err, foundUser){
-      if(err){res.status(500).json({"ERROR":"Database Error"});}
-      console.log("foundUser: \n", foundUser);
-      res.status(200).json({"user": foundUser});
+    db.User.findOne({_id: userId}, function(err, user){
+      if(err){res.json({success: false, message: "username not found"});}
+
+      res.status(200).json({success: true, user: user});
     });
   },
 

@@ -10,12 +10,18 @@ module.exports = {
   },
 
   show: function(req,res){
+    // var locationId = req.params.id;
+    // db.Location.findOne({_id: locationId}, function(err, foundLocation){
+    //   if(err){res.status(500).json({"ERROR":"Database Error"});}
+    //   console.log("foundLocation: \n", foundLocation);
+    //   res.status(200).json({"location": foundLocation});
+    // });
     var locationId = req.params.id;
-    db.Location.findOne({_id: locationId}, function(err, foundLocation){
-      if(err){res.status(500).json({"ERROR":"Database Error"});}
-      console.log("foundLocation: \n", foundLocation);
-      res.status(200).json({"location": foundLocation});
-    });
+    db.Location.findOne({_id: locationId}).populate("posts").exec(function(err, location){
+        if( err || !location ) res.json({ success: false, message: "no Location found at that address"});
+
+        res.json({success: true, location: location});
+      });
   },
 
   // create: function(req, res){

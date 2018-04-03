@@ -4,17 +4,9 @@ var express = require('express'),
     passport = require('passport'),
     bodyParser = require('body-parser');
 
-// ensure authentication here
-// function ensureAuthenticated(req, res, next) {
-//   if (req.isAuthenticated()) {
-//     console.log("User authenticated.");
-//     return next(); }
-//   res.redirected('/login');
-// }
-
-// router.use('/', ensureAuthenticated);
-
-router.get('/user', controller.users.index);
+router.get('/users', controller.users.index);
+router.get("/users/:id", controller.users.show )
+router.post('/signup', controller.users.create );
 
 router.get('/post', controller.posts.index);
 
@@ -23,6 +15,5 @@ router.get('/location', controller.locations.index);
 
 router.post('/login', controller.users.login );
 
-router.post('/signup', controller.users.create );
 
 module.exports = router;
