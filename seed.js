@@ -14,38 +14,38 @@ var db = require('./models');
 //   }
 // ];
 
-var postsList = [
-  {
-    title: "first post",
-    location: "San Francisco",
-    image: "https://sf.curbed.com/2017/7/10/15949390/sf-least-affordable-rent-business",
-    postDescription: "first post: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  },
-  {
-    title: "second post",
-    location: "San Francisco",
-    image: " ",
-    postDescription: "Back in the bay: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  },
-  {
-    title: "third post",
-    location: "Sydney",
-    image: "https://lonelyplanetimages.imgix.net/mastheads/65830387.jpg?sharp=10&vib=20&w=1200",
-    postDescription: "Down-under post: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  },
-  {
-    title: "fourth post",
-    location: "Seattle",
-    image: "https://lonelyplanetimages.imgix.net/mastheads/65830387.jpg?sharp=10&vib=20&w=1200",
-    postDescription: "From the needle: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  },
-  {
-    title: "fifth post",
-    location: "London",
-    image: "https://lonelyplanetimages.imgix.net/mastheads/65830387.jpg?sharp=10&vib=20&w=1200",
-    postDescription: "Proper post: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }
-];
+// var postsList = [
+//   {
+//     title: "first post",
+//     location: "San Francisco",
+//     image: "https://sf.curbed.com/2017/7/10/15949390/sf-least-affordable-rent-business",
+//     postDescription: "first post: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+//   },
+//   {
+//     title: "second post",
+//     location: "San Francisco",
+//     image: " ",
+//     postDescription: "Back in the bay: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+//   },
+//   {
+//     title: "third post",
+//     location: "Sydney",
+//     image: "https://lonelyplanetimages.imgix.net/mastheads/65830387.jpg?sharp=10&vib=20&w=1200",
+//     postDescription: "Down-under post: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+//   },
+//   {
+//     title: "fourth post",
+//     location: "Seattle",
+//     image: "https://lonelyplanetimages.imgix.net/mastheads/65830387.jpg?sharp=10&vib=20&w=1200",
+//     postDescription: "From the needle: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+//   },
+//   {
+//     title: "fifth post",
+//     location: "London",
+//     image: "https://lonelyplanetimages.imgix.net/mastheads/65830387.jpg?sharp=10&vib=20&w=1200",
+//     postDescription: "Proper post: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+//   }
+// ];
 
 var locationsList = [
   {
@@ -98,26 +98,26 @@ db.Location.remove({}, function(err, locations) {
 
     db.Post.remove({}, function(err, post){
       console.log('removed all posts');
-      postsList.forEach(function (postData) {
-        var post = new db.Post({
-          title: postData.title,
-          location: postData.location,
-          image: postData.image,
-          postDescription: postData.postDescription
-        });
-        db.Location.findOne({ city: postData.location }, function(err, foundCity) {
-          console.log(foundCity)
-          console.log('found location ' + foundCity.city + ' for location ' + post.location);
-          if (err) {
-            console.log(err);
-            return;
-          }
-          post.location = foundCity;
-          post.save(function(err, savedPost){
-            if (err) {
-              return console.log(err);
-            }
-            console.log('saved ' + savedPost.title + ' with location ' + foundCity.city);
+      // postsList.forEach(function (postData) {
+      //   var post = new db.Post({
+      //     title: postData.title,
+      //     location: postData.location,
+      //     image: postData.image,
+      //     postDescription: postData.postDescription
+      //   });
+      //   db.Location.findOne({ city: postData.location }, function(err, foundCity) {
+      //     console.log(foundCity)
+      //     console.log('found location ' + foundCity.city + ' for location ' + post.location);
+      //     if (err) {
+      //       console.log(err);
+      //       return;
+      //     }
+      //     post.location = foundCity;
+      //     post.save(function(err, savedPost){
+      //       if (err) {
+      //         return console.log(err);
+      //       }
+      //       console.log('saved ' + savedPost.title + ' with location ' + foundCity.city);
           });
         });
       });
