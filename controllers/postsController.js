@@ -25,9 +25,14 @@ module.exports = {
         res.json({success: false, message: "Sorry there was a problem saving your post. Please try again"});
       }
 
-      // db.Location.findOne({ _id: newPost.location })
+      db.Location.findOne({ _id: newPost.location }).exec(function(err, location){
+        location.posts.push(newPost._id);
+        location.save(function(err){
+          if(err) throw err
+          res.status(200).json({success: true, post: newPost});
+        })
+      })
       // console.log("newPost: \n", newPost);
-      res.status(200).json({success: true, post: newPost});
     });
   },
 
