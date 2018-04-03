@@ -118,9 +118,7 @@ db.Location.remove({}, function(err, locations) {
       //         return console.log(err);
       //       }
       //       console.log('saved ' + savedPost.title + ' with location ' + foundCity.city);
-          });
-        });
-      });
     });
   });
 });
+
