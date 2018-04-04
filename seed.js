@@ -51,22 +51,22 @@ var locationsList = [
   {
     country: "United States of America",
     city: "San Francisco",
-    image: " "
+    image: "/images/sfSkyline.jpg"
   },
   {
     country: "Australia",
     city: "Sydney",
-    image: " "
+    image: "/images/sydney1.jpeg"
   },
   {
     country: "England",
     city: "London",
-    image: " "
+    image: "/images/london.jpeg"
   },
   {
     country: "United States of America",
     city: "Seattle",
-    image: " "
+    image: "/images/seattle.jpeg"
   }
 ];
 
@@ -121,4 +121,3 @@ db.Location.remove({}, function(err, locations) {
     });
   });
 });
-
