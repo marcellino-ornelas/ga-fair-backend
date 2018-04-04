@@ -8,7 +8,7 @@ router.get('/users', controller.users.index);
 router.get("/users/:id", controller.users.show )
 router.post('/signup', controller.users.create );
 
-router.get('/post', controller.posts.index);
+// router.get('/post', controller.posts.index);
 
 router.get('/location', controller.locations.index);
 

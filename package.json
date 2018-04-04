@@ -2,7 +2,7 @@
   "name": "ga-fair",
   "version": "1.0.0",
   "engines": {
-    "node":"8.4.0"
+    "node": "8.4.0"
   },
   "description": "\"project 3\"",
   "main": "server.js",
@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.0",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
